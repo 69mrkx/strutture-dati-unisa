@@ -1,0 +1,19 @@
+gcc -Wall -I. -c main.c -o main.o
+main.c: In function ‘main’:
+main.c:16:21: warning: implicit declaration of function ‘newItem’ [-Wimplicit-function-declaration]
+   16 |         Item item = newItem(valori[i]);
+      |                     ^~~~~~~
+main.c:16:21: warning: initialization of ‘Item’ {aka ‘void *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+main.c:24:34: warning: implicit declaration of function ‘getItemValue’ [-Wimplicit-function-declaration]
+   24 |         printf("Estratto: %d\n", getItemValue(max)); // Assicurati di avere una funzione per leggere l'int dall'item
+      |                                  ^~~~~~~~~~~~
+gcc -Wall -I. -c item/item_int.c -o item_int.o
+gcc -Wall -I. -c utils.c -o utils.o
+gcc -Wall -I. -c Btree/Btree.c -o Btree.o
+gcc -Wall -I. -c heap/heap_tree.c -o heap_tree.o
+gcc -Wall -I. -o main main.o item_int.o utils.o Btree.o heap_tree.o
+/usr/bin/ld: main.o: in function `main':
+main.c:(.text+0x83): undefined reference to `newItem'
+/usr/bin/ld: main.c:(.text+0xf9): undefined reference to `getItemValue'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:34: main] Error 1
